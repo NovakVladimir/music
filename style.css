@@ -113,8 +113,8 @@ h3 {
   }
 
   .img-container {
-    width: 90%;
-    left: 5px;
+    width: 100%;
+    left: 0;
   }
 
   h2 {

@@ -19,17 +19,17 @@ const songs = [
     },
     {
         name: 'music_2',
-        displayName: 'Ong back_2',
-        artist: 'Enigma',
+        displayName: 'Lonely',
+        artist: 'Nana',
     },
     {
         name: 'music_3',
-        displayName: 'Ong back_3',
-        artist: 'Enigma',
+        displayName: 'love on repeat',
+        artist: 'dave ramone & minelli',
     },
     {
         name: 'music_4',
-        displayName: "Hello is it me you're looking for",
+        displayName: "Hello is it me",
         artist: 'lionel richie',
     },
 ];
