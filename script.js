@@ -14,8 +14,8 @@ const nextBtn = document.getElementById('next');
 const songs = [
     {
         name: 'music_1',
-        displayName: 'Ong back',
-        artist: 'Enigma',
+        displayName: 'hello cover',
+        artist: 'leroy adele',
     },
     {
         name: 'music_2',
@@ -26,6 +26,11 @@ const songs = [
         name: 'music_3',
         displayName: 'Ong back_3',
         artist: 'Enigma',
+    },
+    {
+        name: 'music_4',
+        displayName: "Hello is it me you're looking for",
+        artist: 'lionel richie',
     },
 ];
 
@@ -92,7 +97,7 @@ function updateProgressBar(e) {
         console.log(duration, currentTime);
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
-        const durationMinutes = Math.floor(duratioin / 60);
+        const durationMinutes = Math.floor(duration / 60);
         console.log('minutes', durationMinutes);
         let durationSeconds = Math.floor(duration % 60);
         if(durationSeconds < 10) {
@@ -113,14 +118,9 @@ function updateProgressBar(e) {
 }
 
 function setProgressBar(e) {
-    console.log(e);
     const width = this.clientWidth;
-    console.log('width', width);
     const clickX = e.offsetX;
-    console.log('clickX', clickX);
     const {duration} = music;
-    console.log(clickX / width);
-    console.log((clickX / width) * duration);
     music.currentTime = (clickX / width) * duration;
 };
 
