@@ -1,6 +1,5 @@
 const image = document.querySelector('img');
 const title = document.getElementById('title');
-const artist = document.getElementById('artist');
 const music = document.querySelector('audio');
 const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress');
@@ -9,30 +8,10 @@ const durationEl = document.getElementById('duration');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
+const songs = 15;
 
-//Music
-const songs = [
-    {
-        name: 'music_1',
-        displayName: 'hello cover',
-        artist: 'leroy adele',
-    },
-    {
-        name: 'music_2',
-        displayName: 'Lonely',
-        artist: 'Nana',
-    },
-    {
-        name: 'music_3',
-        displayName: 'love on repeat',
-        artist: 'dave ramone & minelli',
-    },
-    {
-        name: 'music_4',
-        displayName: "Hello is it me",
-        artist: 'lionel richie',
-    },
-];
+let apiSongs = [];
+
 
 // Check if playing
 let isPlaying = false;
@@ -42,7 +21,7 @@ let isPlaying = false;
 function playSong() {
     isPlaying = true;
     playBtn.classList.replace('fa-play', 'fa-pause');
-    playBtn.setAttribute('title', 'Pause');
+    // playBtn.setAttribute('title', 'Pause');
     music.play();
 }
 
@@ -50,60 +29,58 @@ function playSong() {
 function pauseSong() {
     isPlaying = false;
     playBtn.classList.replace('fa-pause', 'fa-play');
-    playBtn.setAttribute('title', 'Play');
+    // playBtn.setAttribute('title', 'Play');
     music.pause();
 }
 
 // PLay or pause
 playBtn.addEventListener('click', () => (isPlaying? pauseSong() : playSong() ));
 
+// Current song
+let songIndex = 1;
+
 // Update DOM
-function loadSong(song) {
-    title.textContent = song.displayName;
-    artist.textContent = song.artist;
-    music.src = `./music/${song.name}.mp3`;
-    image.src = `./img/${song.name}.jpg`;
+
+function loadSong(songInd) {
+    title.textContent = songInd;
+    music.src = `./music/${songInd}.mp3`;
 }
 
-// Current song
-let songIndex = 0;
+
 
 // Previous song
 function prevSong() {
     songIndex--;
-    if(songIndex < 0) {
-        songIndex = songs.length - 1;
+    if(songIndex < 1) {
+        songIndex = songs;
     };
-    loadSong(songs[songIndex]);
+    loadSong(songIndex);
     playSong();
 }
 
 // Next song
 function nextSong() {
     songIndex++;
-    if(songIndex > songs.length - 1) {
-        songIndex = 0;
+    if(songIndex > songs) {
+        songIndex = 1;
     }
-    loadSong(songs[songIndex]);
+    loadSong(songIndex);
     playSong();
 }
 
 // // // On-load Select first song
-loadSong(songs[songIndex]);
+loadSong(songIndex);
 
 function updateProgressBar(e) {
     if(isPlaying) {
         const {duration, currentTime} = e.srcElement;
-        console.log(duration, currentTime);
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
         const durationMinutes = Math.floor(duration / 60);
-        console.log('minutes', durationMinutes);
         let durationSeconds = Math.floor(duration % 60);
         if(durationSeconds < 10) {
             durationSeconds = `0${durationSeconds}`;
         }
-        console.log('seconds', durationSeconds);
         if(durationSeconds) {
             durationEl.textContent = `${durationMinutes}:${durationSeconds}`;
         }
@@ -124,6 +101,7 @@ function setProgressBar(e) {
     music.currentTime = (clickX / width) * duration;
 };
 
+ 
 // Event listeners
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
