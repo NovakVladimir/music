@@ -8,7 +8,7 @@ const durationEl = document.getElementById('duration');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
-const songs = 15;
+const songs = 33;
 
 
 // Check if playing
